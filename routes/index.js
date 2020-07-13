@@ -1,4 +1,5 @@
 const router = require('koa-router')()
+const Model = require('../model')
 
 router.get('/', async (ctx, next) => {
   await ctx.render('index', {
@@ -11,9 +12,10 @@ router.get('/string', async (ctx, next) => {
 })
 
 router.get('/json', async (ctx, next) => {
-  ctx.body = {
-    title: 'koa2 json'
-  }
+  console.log('Model', Model.User)
+  let data = await Model.User.build({
+  });
+  ctx.body = data
 })
 
 module.exports = router
