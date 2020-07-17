@@ -5,9 +5,10 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
+const cors = require('koa2-cors');
 
 const index = require('./routes/index')
-const users = require('./routes/users')
+const userRoute = require('./routes/userRoute')
 
 
 // error handler
@@ -19,7 +20,7 @@ app.use(bodyparser({
 }))
 app.use(json())
 app.use(logger())
-app.use(require('koa-static')(__dirname + '/public'))
+app.use(require('koa-static')(__dirname + '/0'))
 
 app.use(views(__dirname + '/views', {
   extension: 'pug'
@@ -33,9 +34,11 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
+// 跨域
+app.use(cors())
 // routes
 app.use(index.routes(), index.allowedMethods())
-app.use(users.routes(), users.allowedMethods())
+app.use(userRoute.routes(), userRoute.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

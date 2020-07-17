@@ -7,15 +7,34 @@ router.get('/', async (ctx, next) => {
   })
 })
 
-router.get('/string', async (ctx, next) => {
-  ctx.body = 'koa2 string'
+router.get('/getUser', async (ctx, next) => {
+  const users = await Model.User.findAll()
+  ctx.body = users
 })
 
 router.get('/json', async (ctx, next) => {
-  console.log('Model', Model.User)
-  let data = await Model.User.build({
-  });
-  ctx.body = data
+  let users = await Model.User.bulkCreate([{
+    user_name: 'ask来得及',
+    user_password: 123,
+  },
+  {
+    user_name: '1255',
+    user_password: 123,
+  }]);
+//  let users = await Model.User.findOrCreate(
+//     {where:{
+//       user_name: '王诗雨',
+//       user_password: 123,
+//     }}
+//   )
+// let users = await Model.User.findAll({
+//   where: {
+//     user_name: 'huya',
+//   }
+// })
+  
+  console.log(JSON.parse(JSON.stringify(users)));  
+  ctx.body = users
 })
 
 module.exports = router

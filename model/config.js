@@ -18,8 +18,8 @@ const sequelize = new Sequelize(
         dialect:'mysql',
         dialectOptions:{
             //字符集
-            charset:'utf8mb4',
-            collate:'utf8mb4_unicode_ci',
+            charset:'utf8',
+            collate:'utf8_general_ci',
             supportBigNumbers: true,
             bigNumberStrings: true
         },

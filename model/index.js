@@ -14,7 +14,6 @@ const files = fs.readdirSync(modelPath);
 const db = {};
 // 将 model 挂到 db 上
 files.forEach(fileName => {
-    console.log('xxx')
   let modelName = Tool.ReplaceFirstUper(fileName.slice(0, -3));
   db[modelName] = require(path.resolve(modelPath, fileName))(sequelize, Sequelize)
   db[modelName].sync({
