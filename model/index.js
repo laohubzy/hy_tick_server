@@ -16,9 +16,10 @@ const db = {};
 files.forEach(fileName => {
   let modelName = Tool.ReplaceFirstUper(fileName.slice(0, -3));
   db[modelName] = require(path.resolve(modelPath, fileName))(sequelize, Sequelize)
-  db[modelName].sync({
-    force: true
-  })
+  // 每次启动都会强制将数据库同步成表的状态 不然就删表
+  // db[modelName].sync({
+  //   force: true
+  // })
 });
 
 
