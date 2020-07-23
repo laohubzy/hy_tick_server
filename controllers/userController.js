@@ -19,7 +19,6 @@ const login = async (ctx) => {
         }
     )
     if (user) {
-        console.log(user)
         ctx.body = Tool.formatResponse(responseConfig.SUCCESS.code, '登录成功', {
             token: Tool.md5Param({ password, userName }),
             userId: user.user_id,
